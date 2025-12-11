@@ -3,33 +3,19 @@ package br.com.arthdroid1.dominio;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Mentoria {
-	private String titulo;
-	private String descricao;
+public class Mentoria extends Conteudo {
+
 	private LocalDate data;
 	private static final DateTimeFormatter FORMATO = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-	public Mentoria(String titulo, String descricao, String data) {
-		this.data = LocalDate.parse(data, FORMATO);
-		this.descricao = descricao;
-		this.titulo = titulo;
+	public Mentoria() {
+		this.data = LocalDate.now();
 	}
+	
+	 public Mentoria(String data) {
+	        this.data = LocalDate.parse(data, FORMATO);
+	    }
 
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
 
 	public LocalDate getData() {
 		
@@ -43,9 +29,14 @@ public class Mentoria {
 	@Override
 	public String toString() {
 		return "----- Mentoria ----"
-				+ "\nTitulo: " + titulo + 
-				" \nDescricao: " + descricao 
+				+ "\nTitulo: " + getTitulo() + 
+				" \nDescricao: " + getDescricao()
 				+ "\nData: " + data.format(FORMATO);
+	}
+
+	@Override
+	public double calcularXP() {
+		return XP_PADRAO + 30d;
 	}
 	
 	
